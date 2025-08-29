@@ -1,0 +1,115 @@
+:root {
+  /* Cores Base */
+  --background-primary: #0B1121;
+  --background-secondary: #111827;
+  --background-tertiary: #1F2937;
+
+  /* Cores de Destaque */
+  --accent-primary: #2563EB;
+  --accent-secondary: #3B82F6;
+  --accent-hover: #60A5FA;
+
+  /* Cores de Texto */
+  --text-primary: rgba(255, 255, 255, 0.9);
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --text-tertiary: rgba(255, 255, 255, 0.5);
+
+  /* Cores de Borda */
+  --border-light: rgba(255, 255, 255, 0.05);
+  --border-medium: rgba(255, 255, 255, 0.08);
+  --border-focus: rgba(37, 99, 235, 0.3);
+
+  /* Cores de Status */
+  --status-success: #4CAF50;
+  --status-warning: #FFC107;
+  --status-error: #EF4444;
+  --status-info: #2563EB;
+
+  /* Gradientes */
+  --gradient-primary: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%);
+  --gradient-secondary: linear-gradient(135deg, #1F2937 0%, #374151 100%);
+
+  /* Sombras */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+  /* Efeitos */
+  --blur-effect: blur(8px);
+  --transition-fast: 200ms ease-in-out;
+  --transition-normal: 300ms ease-in-out;
+}
+
+/* Classes Utilitárias */
+.bg-gradient-primary {
+  background: var(--gradient-primary);
+}
+
+.bg-gradient-secondary {
+  background: var(--gradient-secondary);
+}
+
+/* Estilização Global */
+body {
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+}
+
+/* Inputs e Selects */
+.input-dark {
+  background-color: var(--background-tertiary);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  transition: var(--transition-fast);
+}
+
+.input-dark:hover {
+  border-color: var(--border-medium);
+}
+
+.input-dark:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px var(--border-focus);
+}
+
+/* Botões */
+.btn-primary {
+  background: var(--gradient-primary);
+  color: white;
+  transition: var(--transition-fast);
+}
+
+.btn-primary:hover {
+  filter: brightness(1.1);
+}
+
+.btn-secondary {
+  background: var(--background-tertiary);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+/* Cards */
+.card-dark {
+  background: var(--background-secondary);
+  border: 1px solid var(--border-light);
+  backdrop-filter: var(--blur-effect);
+}
+
+/* Progress Bar */
+.progress-bar {
+  background: var(--background-tertiary);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  background: var(--gradient-primary);
+  height: 100%;
+  transition: var(--transition-normal);
+}
