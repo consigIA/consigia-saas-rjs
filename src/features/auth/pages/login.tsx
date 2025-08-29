@@ -31,7 +31,19 @@ export function LoginPage() {
 
       const response = await authService.login(data)
       setAuth(response.token, response.user)
-      navigate('/dashboard')
+      
+      // Redireciona baseado no plano do usuário
+      const hasCLTPlan = response.user?.company?.services?.some(
+        service => service.serviceType === 'CONSULTA_CLT' && service.isActive
+      )
+      
+      if (hasCLTPlan) {
+        // Se tem plano CLT, vai direto para a página CLT
+        navigate('/dashboard/clt')
+      } else {
+        // Se não tem plano CLT, vai para o dashboard normal
+        navigate('/dashboard')
+      }
     } catch (error) {
       setError('E-mail ou senha incorretos')
     } finally {
