@@ -211,7 +211,7 @@ export const cltService = {
     return resultados
   },
 
-  async buscarCLTsCadastrados(page = 1, limit = 20): Promise<{ cadClts: CLTCadastrado[], pagination: { page: number, limit: number, total: number, pages: number } }> {
+  async buscarCLTsCadastrados(page = 1, limit = 20, filtros?: string): Promise<{ cadClts: CLTCadastrado[], pagination: { page: number, limit: number, total: number, pages: number } }> {
     try {
       // Obtém o token do usuário logado
       const token = useAuthStore.getState().token
@@ -220,8 +220,14 @@ export const cltService = {
         throw new Error('Usuário não autenticado')
       }
 
-      // Faz GET para buscar os CLTs cadastrados no banco com paginação
-      const response = await api.get(`/cad-clt?page=${page}&limit=${limit}`, {
+      // Constrói a URL com parâmetros de paginação e filtros
+      let url = `/cad-clt?page=${page}&limit=${limit}`
+      if (filtros) {
+        url += `&${filtros}`
+      }
+
+      // Faz GET para buscar os CLTs cadastrados no banco com paginação e filtros
+      const response = await api.get(url, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
