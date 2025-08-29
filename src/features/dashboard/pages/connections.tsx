@@ -15,7 +15,7 @@ import {
   FiSearch,
   FiChevronUp,
   FiChevronDown,
-  FiFilter
+
 } from 'react-icons/fi'
 import { SiWhatsapp } from 'react-icons/si'
 import { LoadingSpinner, LoadingDots } from '../../../components/loading-spinner'

@@ -1,5 +1,5 @@
 import { Link, useLocation } from 'react-router-dom'
-import { FiGrid, FiMessageSquare, FiSettings, FiUsers, FiActivity, FiPower, FiChevronLeft, FiBarChart2, FiUserPlus } from 'react-icons/fi'
+import { FiGrid, FiSettings, FiUsers, FiActivity, FiPower, FiChevronLeft, FiBarChart2, FiUserPlus } from 'react-icons/fi'
 import { SiWhatsapp } from 'react-icons/si'
 import { useAuthStore } from '../../features/auth/stores/auth-store'
 import { useState } from 'react'

@@ -20,7 +20,7 @@ export const userService = {
     }
   },
 
-  async createUser(data: { name: string; email: string; password: string; role: 'OWNER' | 'SUPPORT' }): Promise<User> {
+  async createUser(data: { name: string; email: string; password: string; role: 'OWNER' | 'GESTOR' | 'SUPPORT' }): Promise<User> {
     try {
       const response = await api.post('/users', data)
       return response.data

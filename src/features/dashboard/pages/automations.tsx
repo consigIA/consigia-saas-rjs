@@ -15,7 +15,7 @@ import {
   FiSearch,
   FiChevronUp,
   FiChevronDown,
-  FiFilter
+
 } from 'react-icons/fi'
 import { LoadingSpinner } from '../../../components/loading-spinner'
 
@@ -193,8 +193,8 @@ export function AutomationsPage() {
               <button
                 onClick={() => setViewMode('cards')}
                 className={`px-3 h-11 rounded-lg flex items-center gap-2 transition-colors duration-300 ${viewMode === 'cards'
-                    ? 'text-[var(--accent-primary)] bg-[var(--accent-primary)]/10'
-                    : 'text-[var(--text-tertiary)] hover:text-[var(--text-secondary)]'
+                  ? 'text-[var(--accent-primary)] bg-[var(--accent-primary)]/10'
+                  : 'text-[var(--text-tertiary)] hover:text-[var(--text-secondary)]'
                   }`}
               >
                 <FiGrid className="h-5 w-5" />
@@ -203,8 +203,8 @@ export function AutomationsPage() {
               <button
                 onClick={() => setViewMode('list')}
                 className={`px-3 h-11 rounded-lg flex items-center gap-2 transition-colors duration-300 ${viewMode === 'list'
-                    ? 'text-[var(--accent-primary)] bg-[var(--accent-primary)]/10'
-                    : 'text-[var(--text-tertiary)] hover:text-[var(--text-secondary)]'
+                  ? 'text-[var(--accent-primary)] bg-[var(--accent-primary)]/10'
+                  : 'text-[var(--text-tertiary)] hover:text-[var(--text-secondary)]'
                   }`}
               >
                 <FiList className="h-5 w-5" />

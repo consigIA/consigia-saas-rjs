@@ -3,7 +3,7 @@ import { evolutionApiService } from './evolution-api'
 type QRCodeCallback = (qrCode: string | null, error?: string) => void
 
 export class QRCodeManager {
-  private intervalId: NodeJS.Timeout | null = null
+  private intervalId: number | null = null
   private isActive = false
   private instanceName: string
   private callback: QRCodeCallback

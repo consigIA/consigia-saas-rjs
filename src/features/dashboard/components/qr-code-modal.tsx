@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { FiX, FiLoader, FiSmartphone } from 'react-icons/fi'
+import { FiX, FiLoader } from 'react-icons/fi'
 import { evolutionApiService } from '../services/evolution-api'
 
 interface QRCodeModalProps {
@@ -18,7 +18,7 @@ export function QRCodeModal({ isOpen, onClose, instanceName, onSuccess }: QRCode
   const [qrCode, setQrCode] = useState<QRCodeData | null>(null)
   const [error, setError] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const intervalRef = useRef<NodeJS.Timeout>()
+  const intervalRef = useRef<number>()
   const mountedRef = useRef(false)
   const lastStatusRef = useRef<string>('')
 

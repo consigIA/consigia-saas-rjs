@@ -14,7 +14,7 @@ import {
   FiList,
   FiChevronUp,
   FiChevronDown,
-  FiSettings
+
 } from 'react-icons/fi'
 import { LoadingSpinner } from '../../../components/loading-spinner'
 

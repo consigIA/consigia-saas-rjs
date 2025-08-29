@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import {
   FiBarChart2,
   FiDownload,
-  FiFilter,
+
   FiCalendar,
   FiMessageSquare,
   FiUsers,
@@ -28,7 +28,7 @@ import {
   Cell
 } from 'recharts'
 import { format, subDays } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
+
 import { saveAs } from 'file-saver'
 import { LoadingSpinner } from '../../../components/loading-spinner'
 
@@ -65,7 +65,7 @@ const barData = [
 
 export function AnalyticsPage() {
   const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState('')
+
   const [period, setPeriod] = useState('30d')
   const [data] = useState(generateMockData())
   const [viewMode, setViewMode] = useState<'chart' | 'table'>('chart')
@@ -103,15 +103,7 @@ export function AnalyticsPage() {
     )
   }
 
-  if (error) {
-    return (
-      <div className="flex flex-col items-center justify-center h-[calc(100vh-6rem)] gap-4">
-        <span className="text-lg font-light text-[var(--status-error)]">
-          {error}
-        </span>
-      </div>
-    )
-  }
+
 
   return (
     <div className="space-y-8">

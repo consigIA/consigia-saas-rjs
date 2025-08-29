@@ -14,7 +14,7 @@ interface TeamStore {
   deleteMember: (id: string) => Promise<void>
 }
 
-export const useTeamStore = create<TeamStore>((set, get) => ({
+export const useTeamStore = create<TeamStore>((set) => ({
   members: [],
   isLoading: false,
   error: null,

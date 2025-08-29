@@ -11,7 +11,7 @@ import {
   FiGrid,
   FiList,
   FiPlay,
-  FiPause,
+
   FiRefreshCw
 } from 'react-icons/fi'
 import { LoadingSpinner } from '../../../components/loading-spinner'
@@ -30,8 +30,7 @@ interface ConsultaResult {
 export function CLTPage() {
   const [importedCPFs, setImportedCPFs] = useState<ImportedCPF[]>([])
   const [consultas, setConsultas] = useState<ConsultaResult[]>([])
-  const [isConsulting, setIsConsulting] = useState(false)
-  const [currentConsultingIndex, setCurrentConsultingIndex] = useState<number>(-1)
+
   const [viewMode, setViewMode] = useState<'cards' | 'list'>('cards')
   const [searchTerm, setSearchTerm] = useState('')
   const [statusFilter, setStatusFilter] = useState<'ALL' | 'success' | 'no_offers' | 'error' | 'pending'>('ALL')
@@ -381,23 +380,7 @@ export function CLTPage() {
                 </button>
               </div>
 
-              {/* Barra de Progresso */}
-              {isConsulting && (
-                <div className="mt-4">
-                  <div className="flex items-center justify-between text-sm text-[var(--text-tertiary)] mb-2">
-                    <span>Progresso da Consulta</span>
-                    <span>{Math.max(0, currentConsultingIndex + 1)} / {importedCPFs.length}</span>
-                  </div>
-                  <div className="w-full bg-[var(--background-tertiary)] rounded-full h-2">
-                    <div
-                      className="bg-[var(--accent-primary)] h-2 rounded-full transition-all duration-500 ease-out"
-                      style={{
-                        width: `${importedCPFs.length > 0 ? ((currentConsultingIndex + 1) / importedCPFs.length) * 100 : 0}%`
-                      }}
-                    />
-                  </div>
-                </div>
-              )}
+
             </div>
           )}
 
@@ -464,16 +447,10 @@ export function CLTPage() {
                 {filteredConsultas.map((consulta, index) => (
                   <div
                     key={index}
-                    className={`group relative bg-[var(--background-secondary)]/95 backdrop-blur-lg rounded-2xl border p-6
-                 hover:border-[var(--border-medium)] transition-all duration-500 ${currentConsultingIndex === index && consulta.status === 'pending'
-                        ? 'border-[var(--accent-primary)] shadow-lg shadow-[var(--accent-primary)]/20'
-                        : 'border-[var(--border-light)]'
-                      }`}
+                    className="group relative bg-[var(--background-secondary)]/95 backdrop-blur-lg rounded-2xl border border-[var(--border-light)] p-6
+                 hover:border-[var(--border-medium)] transition-all duration-500"
                   >
-                    <div className={`absolute inset-0 bg-gradient-to-br from-[var(--accent-primary)]/0 via-[var(--accent-primary)]/[0.02] to-[var(--accent-secondary)]/[0.02] transition-opacity duration-500 rounded-2xl ${currentConsultingIndex === index && consulta.status === 'pending'
-                      ? 'opacity-100'
-                      : 'opacity-0 group-hover:opacity-100'
-                      }`} />
+                    <div className="absolute inset-0 bg-gradient-to-br from-[var(--accent-primary)]/0 via-[var(--accent-primary)]/[0.02] to-[var(--accent-secondary)]/[0.02] transition-opacity duration-500 rounded-2xl opacity-0 group-hover:opacity-100" />
 
                     <div className="relative">
                       {/* Cabeçalho */}
@@ -488,17 +465,10 @@ export function CLTPage() {
                         </div>
 
                         <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-light ${getStatusColor(consulta.status)} bg-[var(--background-tertiary)]/50 border border-[var(--border-light)]`}>
-                          {currentConsultingIndex === index && consulta.status === 'pending' ? (
-                            <>
-                              <FiRefreshCw className="h-5 w-5 animate-spin" />
-                              Consultando...
-                            </>
-                          ) : (
-                            <>
-                              {getStatusIcon(consulta.status)}
-                              {getStatusName(consulta.status)}
-                            </>
-                          )}
+                          <>
+                            {getStatusIcon(consulta.status)}
+                            {getStatusName(consulta.status)}
+                          </>
                         </div>
                       </div>
 
@@ -600,17 +570,10 @@ export function CLTPage() {
                           </td>
                           <td className="p-4">
                             <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-light ${getStatusColor(consulta.status)} bg-[var(--background-tertiary)]/50 border border-[var(--border-light)]`}>
-                              {currentConsultingIndex === index && consulta.status === 'pending' ? (
-                                <>
-                                  <FiRefreshCw className="h-5 w-5 animate-spin" />
-                                  Consultando...
-                                </>
-                              ) : (
-                                <>
-                                  {getStatusIcon(consulta.status)}
-                                  {getStatusName(consulta.status)}
-                                </>
-                              )}
+                              <>
+                                {getStatusIcon(consulta.status)}
+                                {getStatusName(consulta.status)}
+                              </>
                             </div>
                           </td>
                           <td className="p-4">

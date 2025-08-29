@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useHasPermission, PERMISSIONS } from '../../auth/components/role-guard'
 import { companyService } from '../services/company-service'
-import type { Company, UpdateCompanyData } from '../types'
+import type { UpdateCompanyData } from '../types'
 
 const companySchema = z.object({
   name: z.string().min(1, 'Nome é obrigatório'),
@@ -40,7 +40,7 @@ export function CompanySettings() {
     try {
       setIsLoading(true)
       setError('')
-      const company = await companyService.getCompany()
+      const company = await companyService.fetchCompany()
       reset(company) // Preenche o formulário com os dados
     } catch (error) {
       setError('Erro ao carregar dados da empresa')
@@ -53,7 +53,7 @@ export function CompanySettings() {
     try {
       setError('')
       setSuccess('')
-      const company = await companyService.getCompany() // Busca para ter o ID atual
+      const company = await companyService.fetchCompany() // Busca para ter o ID atual
       await companyService.updateCompany(company.id, data)
       setSuccess('Dados atualizados com sucesso!')
     } catch (error) {

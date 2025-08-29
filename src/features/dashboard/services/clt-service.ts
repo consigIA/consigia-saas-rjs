@@ -91,6 +91,7 @@ export interface BackgroundConsulta {
     status: 'pending' | 'success' | 'error' | 'no_offers'
     resultado?: CLTResponse
     cadastrado?: boolean
+    errorMessage?: string
   }>
   error?: string
 }
@@ -287,8 +288,8 @@ export const cltService = {
 
       // Retoma o processamento
       const cpfsPendentes = consulta.results
-        .filter((result, index) => result.status === 'pending')
-        .map((result, index) => ({
+        .filter((result) => result.status === 'pending')
+        .map((result) => ({
           cpf: result.cpf,
           nome: result.nome
         }))
@@ -494,10 +495,11 @@ export const cltService = {
   },
 
   // Atualiza erro de uma consulta
-  atualizarErroConsulta(consultaId: string, index: number, error: string): void {
+  atualizarErroConsulta(consultaId: string, index: number, errorMessage: string): void {
     const consulta = this.obterConsultaBackground(consultaId)
     if (consulta && consulta.results[index]) {
       consulta.results[index].status = 'error'
+      consulta.results[index].errorMessage = errorMessage
       consulta.processedCPFs = Math.max(consulta.processedCPFs, index + 1)
       consulta.lastUpdate = new Date().toISOString()
 

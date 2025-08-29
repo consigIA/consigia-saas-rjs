@@ -13,7 +13,7 @@ import {
   FiSearch,
   FiChevronUp,
   FiChevronDown,
-  FiFilter
+
 } from 'react-icons/fi'
 import { LoadingSpinner } from '../../../components/loading-spinner'
 import { userService, type User } from '../services/user-service'
@@ -30,7 +30,7 @@ const userSchema = z.object({
     .regex(/[a-z]/, 'A senha deve conter pelo menos uma letra minúscula')
     .regex(/[0-9]/, 'A senha deve conter pelo menos um número')
     .regex(/[^A-Za-z0-9]/, 'A senha deve conter pelo menos um caractere especial'),
-  role: z.enum(['OWNER', 'SUPPORT'], {
+  role: z.enum(['OWNER', 'GESTOR', 'SUPPORT'], {
     errorMap: () => ({ message: 'Selecione um perfil válido' })
   })
 })
@@ -47,7 +47,7 @@ export function TeamPage() {
   const [viewMode, setViewMode] = useState<'cards' | 'list'>('cards')
   const [sortField, setSortField] = useState<'name' | 'role' | 'createdAt'>('name')
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc')
-  const [roleFilter, setRoleFilter] = useState<'ALL' | 'OWNER' | 'SUPPORT'>('ALL')
+  const [roleFilter, setRoleFilter] = useState<'ALL' | 'OWNER' | 'GESTOR' | 'SUPPORT'>('ALL')
   const [searchTerm, setSearchTerm] = useState('')
   const canManageUsers = useHasPermission(PERMISSIONS.MANAGE_OWN_COMPANY)
 

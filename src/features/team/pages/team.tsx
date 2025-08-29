@@ -33,7 +33,7 @@ export function TeamPage(): JSX.Element {
   const {
     members,
     isLoading,
-    error,
+
     selectedMember,
     fetchMembers,
     selectMember,

@@ -5,11 +5,9 @@ import {
   FiSave,
   FiKey,
   FiServer,
-  FiMessageSquare,
-  FiCreditCard,
-  FiUsers,
+
   FiGlobe,
-  FiAlertTriangle,
+
   FiDatabase,
   FiBell,
   FiCheckCircle,
@@ -17,7 +15,7 @@ import {
   FiBriefcase
 } from 'react-icons/fi'
 import { useHasPermission, PERMISSIONS } from '../../auth/components/role-guard'
-import { SiWhatsapp } from 'react-icons/si'
+
 import { LoadingSpinner } from '../../../components/loading-spinner'
 
 interface WebhookConfig {

@@ -2,11 +2,9 @@ import { useState, useEffect } from 'react'
 import { FiPlay, FiPause, FiX, FiCheck, FiClock, FiAlertCircle } from 'react-icons/fi'
 import { cltService, type BackgroundConsulta } from '../services/clt-service'
 
-interface BackgroundConsultaManagerProps {
-  onConsultaUpdate?: (consulta: BackgroundConsulta) => void
-}
 
-export function BackgroundConsultaManager({ onConsultaUpdate }: BackgroundConsultaManagerProps) {
+
+export function BackgroundConsultaManager() {
   const [consultas, setConsultas] = useState<BackgroundConsulta[]>([])
   const [activeConsulta, setActiveConsulta] = useState<BackgroundConsulta | null>(null)
 
@@ -16,20 +14,20 @@ export function BackgroundConsultaManager({ onConsultaUpdate }: BackgroundConsul
 
 
 
-        // Verifica se há consultas em andamento e as retoma se necessário
+    // Verifica se há consultas em andamento e as retoma se necessário
     const consultasEmAndamento = consultas.filter(c => c.status === 'running')
     if (consultasEmAndamento.length > 0) {
       console.log('🔄 Encontradas consultas em andamento, verificando se precisam ser retomadas...')
-      
+
       consultasEmAndamento.forEach(consulta => {
         // Verifica se a consulta está "perdida" (sem atualização recente)
         const agora = new Date()
         const ultimaAtualizacao = new Date(consulta.lastUpdate)
         const diffMinutos = (agora.getTime() - ultimaAtualizacao.getTime()) / (1000 * 60)
-        
+
         if (diffMinutos > 2) { // Se não houve atualização nos últimos 2 minutos
           console.log(`🔄 Retomando consulta ${consulta.id.slice(-8)} que estava perdida`)
-          
+
           // Retoma a consulta
           retomarConsultaPerdida(consulta)
         }
@@ -60,7 +58,7 @@ export function BackgroundConsultaManager({ onConsultaUpdate }: BackgroundConsul
     const updateInterval = setInterval(() => {
       const consultasAtualizadas = cltService.obterConsultasBackground()
       setConsultas(consultasAtualizadas)
-      
+
       // Atualiza a consulta ativa
       const consultaAtivaAtualizada = consultasAtualizadas.find(c => c.status === 'running')
       if (consultaAtivaAtualizada) {
@@ -109,18 +107,18 @@ export function BackgroundConsultaManager({ onConsultaUpdate }: BackgroundConsul
   const retomarConsultaPerdida = (consulta: BackgroundConsulta) => {
     try {
       console.log(`🔄 Retomando consulta perdida: ${consulta.id}`)
-      
+
       // Obtém os CPFs que ainda não foram processados
       const cpfsPendentes = consulta.results
-        .filter((result, index) => result.status === 'pending')
-        .map((result, index) => ({
+        .filter((result) => result.status === 'pending')
+        .map((result) => ({
           cpf: result.cpf,
           nome: result.nome
         }))
 
       if (cpfsPendentes.length > 0) {
         console.log(`🔄 ${cpfsPendentes.length} CPFs pendentes encontrados, retomando processamento...`)
-        
+
         // Retoma a consulta usando o serviço
         cltService.retomarConsultaPerdida(consulta.id, cpfsPendentes)
       } else {
@@ -136,12 +134,12 @@ export function BackgroundConsultaManager({ onConsultaUpdate }: BackgroundConsul
   // Verifica consultas perdidas periodicamente
   const verificarConsultasPerdidas = () => {
     const consultasAtivas = consultas.filter(c => c.status === 'running')
-    
+
     consultasAtivas.forEach(consulta => {
       const agora = new Date()
       const ultimaAtualizacao = new Date(consulta.lastUpdate)
       const diffMinutos = (agora.getTime() - ultimaAtualizacao.getTime()) / (1000 * 60)
-      
+
       if (diffMinutos > 2) {
         console.log(`🔄 Consulta ${consulta.id.slice(-8)} perdida detectada, retomando...`)
         retomarConsultaPerdida(consulta)
